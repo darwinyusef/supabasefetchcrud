@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="tblContenido"></div>
+
+    <script type="application/javascript">
+      async function obtenerTodos() {
+        try {
+          fetch("https://eglxewwgvluxmrkgrumu.supabase.co/rest/v1/user?select=*", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              apikey:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnbHhld3dndmx1eG1ya2dydW11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI1OTM5NDAsImV4cCI6MjAwODE2OTk0MH0.51paB1h8te9yHt5IpeKN5bpHsGjr_hD0EOo6FkhYU6A",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnbHhld3dndmx1eG1ya2dydW11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI1OTM5NDAsImV4cCI6MjAwODE2OTk0MH0.51paB1h8te9yHt5IpeKN5bpHsGjr_hD0EOo6FkhYU6A",
+            },
+          })
+            .then((respuesta) => respuesta.json())
+            .then((data) => {
+              console.log(data);
+              let cuerpoTabla = document.getElementById("tblContenido");
+              let salida = "";
+              //   for (let elemento of data.dispositivos) {
+              //     salida += `
+              //         <tr>
+              //             <td>${elemento.id}</td>
+              //             <td>${elemento.name}</td>
+              //             <td>${elemento.email}</td>
+              //         </tr>
+              //     `;
+              //   }
+              // cuerpoTabla.innerHTML = salida;
+            })
+            .catch((error) => {
+              throw new Error("Error en la solicitud: " + error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+
+      async function agregarUno() {
+        try {
+          /* let marca = document.getElementById("inputMarca").value;
+              let modelo = document.getElementById("inputModelo").value;
+              let color = document.getElementById("inputColor").value;
+              let almacenamiento = document.getElementById("inputAlmacenamiento").value;
+              let procesador = document.getElementById("inputProcesador").value; */
+
+          await fetch("https://eglxewwgvluxmrkgrumu.supabase.co/rest/v1/user", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              apikey:
+                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnbHhld3dndmx1eG1ya2dydW11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI1OTM5NDAsImV4cCI6MjAwODE2OTk0MH0.51paB1h8te9yHt5IpeKN5bpHsGjr_hD0EOo6FkhYU6A",
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVnbHhld3dndmx1eG1ya2dydW11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2OTI1OTM5NDAsImV4cCI6MjAwODE2OTk0MH0.51paB1h8te9yHt5IpeKN5bpHsGjr_hD0EOo6FkhYU6A",
+            },
+            body: JSON.stringify({
+              id: 16,
+              name: "Named4",
+              email: "em4@.gmail.com",
+              activation: "True",
+              created_at: "2023-02-08 06:01:01+00",
+            }),
+          })
+            .then((res) => {
+              if (res.status == 409) {
+                alert("Esta repetido");
+              }
+              if (res.status == 201) {
+                obtenerTodos();
+              }
+            })
+            .catch((error) => {
+              throw new Error("Error en la solicitud: " + error);
+            });
+        } catch (error) {
+          console.error(error);
+        }
+      }
+      agregarUno();
+    </script>
+  </body>
+</html>
